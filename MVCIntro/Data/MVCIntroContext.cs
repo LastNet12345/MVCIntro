@@ -14,6 +14,6 @@ namespace MVCIntro.Data
         {
         }
 
-        public DbSet<MVCIntro.Models.Employee> Employee { get; set; } = default!;
+        public DbSet<Employee> Employee { get; set; } = default!;
     }
 }
