@@ -14,27 +14,31 @@ namespace MVCIntro.Controllers
 
         public IActionResult Index()
         {
-
-
-
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy(/*string name, int salary*/ /*object genericObject*/ TestModel model)
         {
-            //Console.WriteLine("Någon klickade på Privacy-länken!");
-            //return View("Index");
-            Hej();
-            //return View(nameof(Index));
-            //return RedirectToAction(nameof(Index));
 
-            return View();
+            // Undvik dessa
+            // ViewData["Name"] = name;
+            // ViewBag.Name = name;
+            // TempData["name"] = name;
+
+            var newModel = new TestModel();
+            newModel.Name = model.Name;
+            newModel.Salary = model.Salary;
+
+
+            return View(newModel);
         }
 
-        public void Hej()
+        public IActionResult SendToPrivacy()
         {
-            Console.WriteLine("Hej från Home-controller!");
+            return View(nameof(SendToPrivacy));
         }
+
+       
 
 
     }

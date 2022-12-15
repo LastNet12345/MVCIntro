@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using MVCIntro.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<MVCIntroContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MVCIntroContext") ?? throw new InvalidOperationException("Connection string 'MVCIntroContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
