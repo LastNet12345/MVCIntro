@@ -1,4 +1,4 @@
-﻿@model MVCIntro.Models.Employee
+﻿@model EmployeeDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -17,10 +17,10 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Salary)
+            @Html.DisplayNameFor(model => model.Department)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Salary)
+            @Html.DisplayFor(model => model.Department)
         </dd>
     </dl>
 </div>

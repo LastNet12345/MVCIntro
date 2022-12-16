@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVCIntro.Data;
 using MVCIntro.Models;
+using MVCIntro.Models.ViewModels;
 
 namespace MVCIntro.Controllers
 {
@@ -25,6 +26,33 @@ namespace MVCIntro.Controllers
               return View(await _context.Employee.ToListAsync());
         }
 
+
+        public async Task<IActionResult> Index2()
+        {
+            var viewModel = await _context.Employee.Select(e => new EmployeeIndexViewModel
+            {
+                Id = e.Id,
+                Name = e.Name,
+                Department = e.Department
+            }).ToListAsync();
+
+            return View(/*nameof(Index2),*/ viewModel);
+        }
+
+        public async Task<IActionResult> Search(string searchString)
+        {
+            var viewModel = await _context.Employee
+                .Where(e => e.Name.StartsWith(searchString))
+                .Select(e => new EmployeeIndexViewModel
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    Department = e.Department
+                }).ToListAsync();
+
+            return View(nameof(Index2), viewModel);
+        }
+
         // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -35,12 +63,18 @@ namespace MVCIntro.Controllers
 
             var employee = await _context.Employee
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (employee == null)
             {
                 return NotFound();
             }
 
-            return View(employee);
+            var viewModel = new EmployeeDetailsViewModel();
+            viewModel.Id = employee.Id;
+            viewModel.Name = employee.Name;
+            viewModel.Department = employee.Department;
+
+            return View(viewModel);
         }
 
         // GET: Employees/Create
