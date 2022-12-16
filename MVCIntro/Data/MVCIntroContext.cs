@@ -15,5 +15,7 @@ namespace MVCIntro.Data
         }
 
         public DbSet<Employee> Employee { get; set; } = default!;
+
+        public DbSet<Robot> Robot { get; set; }
     }
 }

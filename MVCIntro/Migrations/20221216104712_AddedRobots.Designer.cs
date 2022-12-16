@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVCIntro.Migrations
 {
     [DbContext(typeof(MVCIntroContext))]
-    [Migration("20221215141621_Alteredemployee")]
-    partial class Alteredemployee
+    [Migration("20221216104712_AddedRobots")]
+    partial class AddedRobots
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,6 +45,26 @@ namespace MVCIntro.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Employee");
+                });
+
+            modelBuilder.Entity("MVCIntro.Models.Robot", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RAM")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Robot");
                 });
 #pragma warning restore 612, 618
         }
